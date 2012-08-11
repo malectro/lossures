@@ -9,7 +9,8 @@ var LS = (function () {
     vid.play();
     setTimeout(function () {
       vid.playbackRate = 1;
-    }, 10000);
+      vid.className = 'scale';
+    }, 3000);
   };
 
   return me;
