@@ -1,7 +1,13 @@
 var LS = (function () {
 
   var me = {},
-      vid, pop, container, streetView;
+      _scene = 1,
+      _paused = false,
+      vid, pop, container, streetview;
+
+  me.nextScene = function () {
+    _scene++;
+  };
 
   me.pause = function () {
     vid.pause();
@@ -9,7 +15,7 @@ var LS = (function () {
     $('#video-pause').hide();
     $('#video-play').show();
     setTimeout(function () {
-      document.getElementById('ls-pause-1').classList.add('fade-in');
+      $('.ls-pause-' + _scene).addClass('fade-in');
     }, 1000);
     streetView.update(40.711626, -73.960094);  // TODO - dbow - update with dynamic latitude and longitude.
   };
@@ -19,8 +25,16 @@ var LS = (function () {
     $('#video-play').hide();
     $('#video-pause').show();
     vid.play();
-    document.getElementById('ls-pause-1').classList.remove('fade-in');
+    $('.ls-anno-box').removeClass('fade-in');
     streetView.hide();
+  };
+
+  me.breakpoint = function () {
+    if (!_paused) {
+      me.pause();
+    }
+    _paused = false;
+    setTimeout(me.nextScene, 1500);
   };
 
   me.init = function () {
@@ -79,11 +93,12 @@ var LS = (function () {
       console.log(pop.currentTime());
     });
 
-    pop.cue(6.58, function () {
-      me.pause();
-    });
+    pop.cue(6.58, me.breakpoint);
+    pop.cue(35.5, me.breakpoint);
+    pop.cue(46, me.breakpoint);
 
     $('#video-pause').on('click', function () {
+      _paused = true;
       me.pause();
     });
 
@@ -95,6 +110,7 @@ var LS = (function () {
 
     vid.play();
 
+    //light box
     $('.ls-anno-img').toggle(function () {
       var $el = $(this).addClass('large'),
           $w = $(window),
@@ -113,6 +129,25 @@ var LS = (function () {
     }, function () {
       $(this).removeClass('large');
     });
+
+    $('.ls-anno-vid').each(function () {
+      var pop = Popcorn(this);
+
+      function stop() {
+        pop.playing = false;
+        pop.pause();
+      }
+
+      pop.on('ended', stop);
+
+      $(this).click(function () {
+        if (pop.playing) {
+          return stop();
+        }
+        pop.playing = true;
+        pop.play();
+      });
+    })
   };
 
   me.streetView = function () {

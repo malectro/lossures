@@ -74,13 +74,30 @@ iframe {
   left: 900px;
   font-size: 26px;
 }
-.ls-pause-1 .ls-anno-img {
+.ls-pause-1 .ls-anno-vid {
   top: 20px;
   left: 50px;
   width: 400px;
 }
 
+.ls-pause-2 .ls-anno-text {
+  top: 20px;
+  left: 900px;
+  font-size: 26px;
+}
+.ls-pause-2 .ls-anno-img {
+  top: 20px;
+  left: 50px;
+  width: 400px;
+}
+
+
 /* annotation objects */
+.ls-anno-vid {
+  position: absolute;
+  cursor: pointer;
+  z-index: 2;
+}
 .ls-anno-text {
   background: rgba(0,0,0,0.5);
   position: absolute;
