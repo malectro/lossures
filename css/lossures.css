@@ -69,7 +69,8 @@ iframe {
 }
 .ls-pause-1 .ls-anno-text {
   top: 50px;
-  left: 1000px;
+  left: 900px;
+  font-size: 26px;
 }
 .ls-pause-1 .ls-anno-img {
   top: 50px;
@@ -79,9 +80,11 @@ iframe {
 
 /* annotation objects */
 .ls-anno-text {
+  background: rgba(0,0,0,0.5);
   position: absolute;
+  padding: 10px;
   font-size: 20px;
-  width: 200px;
+  width: 280px;
 }
 .ls-anno-img {
   position: absolute;

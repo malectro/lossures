@@ -1,37 +1,53 @@
 var LS = (function () {
 
-  var me = {};
+  var me = {},
+      vid, pop, container, streetview;
+
+  me.pause = function () {
+    vid.pause();
+    container.className = 'minimize';
+    $('#video-pause').hide();
+    $('#video-play').show();
+    setTimeout(function () {
+      document.getElementById('ls-pause-1').classList.add('fade-in');
+    }, 1000);
+    streetView.update(40.711626, -73.960094);  // TODO - dbow - update with dynamic latitude and longitude.
+  };
+
+  me.play = function () {
+    container.className = 'maximize';
+    $('#video-play').hide();
+    $('#video-pause').show();
+    vid.play();
+    document.getElementById('ls-pause-1').classList.remove('fade-in');
+    streetView.hide();
+  };
 
   me.init = function () {
-
-    var vid = document.getElementById('vid'),
-        pop = Popcorn(vid),
-        container = document.getElementById('source-container'),
-        streetView = me.streetView();
+    vid = document.getElementById('vid');
+    pop = Popcorn(vid);
+    container = document.getElementById('source-container');
+    streetView = me.streetView();
 
     vid.loop = false;
     vid.playbackRate = 1;
 
     streetView.create();
 
+    pop.on('pause', function () {
+      console.log(pop.currentTime());
+    });
+
+    pop.cue(6.58, function () {
+      me.pause();
+    });
+
     $('#video-pause').on('click', function () {
-      vid.pause();
-      container.className = 'minimize';
-      $('#video-pause').hide();
-      $('#video-play').show();
-      setTimeout(function () {
-        document.getElementById('ls-pause-1').classList.add('fade-in');
-      }, 1000);
-      streetView.update(40.711626, -73.960094);  // TODO - dbow - update with dynamic latitude and longitude.
+      me.pause();
     });
 
     $('#video-play').on('click', function () {
-      container.className = 'maximize';
-      $('#video-play').hide();
-      $('#video-pause').show();
-      vid.play();
-      document.getElementById('ls-pause-1').classList.remove('fade-in');
-      streetView.hide();
+      me.play();
     });
 
     //vid.play();
