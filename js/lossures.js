@@ -1,18 +1,32 @@
 var LS = (function () {
+
   var me = {};
 
   me.init = function () {
+
     var vid = document.getElementById('vid');
 
     vid.loop = true;
-    vid.playbackRate = 0.1;
+    vid.playbackRate = 1;
     vid.play();
-    setTimeout(function () {
-      vid.playbackRate = 1;
-      vid.className = 'scale';
-    }, 3000);
+
+    $('#video-pause').on('click', function () {
+      vid.pause();
+      vid.className = 'minimize';
+      $('#video-pause').hide();
+      $('#video-play').show();
+    });
+
+    $('#video-play').on('click', function () {
+      vid.play();
+      vid.className = 'maximize';
+      $('#video-play').hide();
+      $('#video-pause').show();
+    });
+
   };
 
   return me;
+
 }());
 

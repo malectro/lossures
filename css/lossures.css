@@ -9,6 +9,8 @@ html, body {
   font-family: sans-serif;
 }
 
+
+/* Source video styling */
 #vid {
   position: absolute;
   top: 0;
@@ -16,21 +18,83 @@ html, body {
   width: 100%;
 }
 
-#vid.scale {
-  -webkit-animation: scale 1s;
-  top: 400px;
-  left: 200px;
-  width: 200px;
+/* Animation to minimize source video */
+#vid.minimize {
+  -webkit-animation: minimize 1s;
+  top: 50%;
+  left: 25%;
+  width: 50%;
 }
-@-webkit-keyframes scale {
+@-webkit-keyframes minimize {
   from {
-    top: 0;
-    left: 0;
-    width: 1000px;
+    top: 0%;
+    left: 0%;
+    width: 100%;
   }
   to {
-    top: 400px;
-    left: 200px;
-    width: 200px;
+    top: 50%;
+    left: 25%;
+    width: 50%;
   }
 }
+
+/* Animation to maximize source video */
+#vid.maximize {
+  -webkit-animation: maximize 1s;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+}
+@-webkit-keyframes maximize {
+  from {
+    top: 50%;
+    left: 25%;
+    width: 50%;
+  }
+  to {
+    top: 0%;
+    left: 0%;
+    width: 100%;
+  }
+}
+
+
+/* Styling of video controls (counter for layers and play/pause) */
+#video-controls {
+  position: absolute;
+  bottom: 0px;
+  height: 100px;
+  left: 0px;
+  right: 0px;
+}
+
+  #video-controls div {
+    font-weight: bold;
+    color: white;
+    font-size: 50px;
+  }
+
+  #layer-counter {
+    float: left;
+    font-size: 60px;
+    margin: 0px 0px 30px 50px;
+  }
+
+  #video-pause {
+    float: right;
+    margin: 0px 50px 20px 0px;
+  }
+    #video-pause:hover {
+      text-shadow: 2px 2px 3px #888;
+      cursor: pointer;
+    }
+
+  #video-play {
+    float: right;
+    margin: 0px 50px 20px 0px;
+    display: none;
+  }
+    #video-play:hover {
+      text-shadow: 2px 2px 3px #888;
+      cursor: pointer;
+    }
