@@ -14,6 +14,15 @@ iframe {
   padding: 0;
 }
 
+#background-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 0;
+  background-color: black;
+}
 
 #source-container {
   position: absolute;
