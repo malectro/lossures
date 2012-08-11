@@ -45,7 +45,7 @@ iframe {
 /* Animation to minimize source video */
 #source-container.minimize {
   -webkit-animation: minimize 1s;
-  top: 50%;
+  top: 30%;
   left: 25%;
   width: 50%;
 }
@@ -56,7 +56,7 @@ iframe {
     width: 100%;
   }
   to {
-    top: 50%;
+    top: 30%;
     left: 25%;
     width: 50%;
   }
@@ -65,17 +65,17 @@ iframe {
 /* hooray */
 .ls-pause-1 #zeega-1 {
   position: absolute;
-  top: 50px;
+  top: 20px;
   left: 550px;
   width: 200px;
 }
 .ls-pause-1 .ls-anno-text {
-  top: 50px;
+  top: 20px;
   left: 900px;
   font-size: 26px;
 }
 .ls-pause-1 .ls-anno-img {
-  top: 50px;
+  top: 20px;
   left: 50px;
   width: 400px;
 }
