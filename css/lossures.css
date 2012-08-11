@@ -85,6 +85,11 @@ iframe {
   left: 900px;
   font-size: 26px;
 }
+.ls-pause-2 .ls-anno-vid {
+  top: 20px;
+  left: 50px;
+  width: 400px;
+}
 .ls-pause-2 .ls-anno-img {
   top: 20px;
   left: 50px;
