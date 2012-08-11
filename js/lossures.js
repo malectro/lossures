@@ -53,18 +53,18 @@ var LS = (function () {
     var layerConfigArray = [
         {
           start: 0,
-          end: 1,
+          end: 7,
+          numLayers: 3
+        },
+        {
+          start: 7,
+          end: 36,
           numLayers: 2
         },
         {
-          start: 1,
-          end: 2,
+          start: 36,
+          end: 46,
           numLayers: 1
-        },
-        {
-          start: 2,
-          end: 6,
-          numLayers: 5
         }
       ],
       layer,
