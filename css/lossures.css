@@ -20,6 +20,7 @@ iframe {
   top: 0;
   left: 0;
   width: 100%;
+  text-align: center;
 }
 
 /* Source video styling */
@@ -27,7 +28,7 @@ iframe {
   position: relative;
   top: 0;
   left: 0;
-  width: 100%;
+  max-width: 100%;
 }
 
 /* Animation to minimize source video */
@@ -58,7 +59,7 @@ iframe {
   width: 200px;
 }
 .ls-pause-1 .ls-anno-text {
-  top: 150px;
+  top: 50px;
   left: 1000px;
 }
 .ls-pause-1 .ls-anno-img {
@@ -70,7 +71,7 @@ iframe {
 /* annotation objects */
 .ls-anno-text {
   position: absolute;
-  font-size: 14px;
+  font-size: 20px;
   width: 200px;
 }
 .ls-anno-img {
@@ -175,6 +176,7 @@ body .ls-anno-box .ls-anno-img.large {
   #video-pause {
     float: right;
     margin: 0px 50px 20px 0px;
+    display: none;
   }
     #video-pause:hover {
       text-shadow: 2px 2px 3px #888;
@@ -184,7 +186,6 @@ body .ls-anno-box .ls-anno-img.large {
   #video-play {
     float: right;
     margin: 0px 50px 20px 0px;
-    display: none;
   }
     #video-play:hover {
       text-shadow: 2px 2px 3px #888;

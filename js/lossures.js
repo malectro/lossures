@@ -5,9 +5,10 @@ var LS = (function () {
   me.init = function () {
 
     var vid = document.getElementById('vid'),
+        pop = Popcorn(vid),
         container = document.getElementById('source-container');
 
-    vid.loop = true;
+    vid.loop = false;
     vid.playbackRate = 1;
 
     $('#video-pause').on('click', function () {
@@ -25,11 +26,10 @@ var LS = (function () {
       $('#video-play').hide();
       $('#video-pause').show();
       vid.play();
+      document.getElementById('ls-pause-1').classList.remove('fade-in');
     });
 
-    vid.playbackRate = 0.1;
     //vid.play();
-    //
     $('.ls-anno-img').toggle(function () {
       var $el = $(this).addClass('large'),
           $w = $(window),
