@@ -14,6 +14,7 @@ iframe {
   padding: 0;
 }
 
+/* DIV containing street view image */
 #background-container {
   position: absolute;
   top: 0;
@@ -24,6 +25,7 @@ iframe {
   background-color: black;
 }
 
+/* DIV containing video source */
 #source-container {
   position: absolute;
   top: 0;
@@ -184,11 +186,13 @@ body .ls-anno-box .ls-anno-img.large {
     font-size: 60px;
     margin: 0px 0px 30px 50px;
   }
+    #layer-counter div {
+      line-height: 10px;
+    }
 
   #video-pause {
     float: right;
     margin: 0px 50px 20px 0px;
-    display: none;
   }
     #video-pause:hover {
       text-shadow: 2px 2px 3px #888;
@@ -198,6 +202,7 @@ body .ls-anno-box .ls-anno-img.large {
   #video-play {
     float: right;
     margin: 0px 50px 20px 0px;
+    display: none;
   }
     #video-play:hover {
       text-shadow: 2px 2px 3px #888;

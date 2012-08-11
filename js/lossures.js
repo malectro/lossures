@@ -1,7 +1,7 @@
 var LS = (function () {
 
   var me = {},
-      vid, pop, container, streetview;
+      vid, pop, container, streetView;
 
   me.pause = function () {
     vid.pause();
@@ -24,6 +24,9 @@ var LS = (function () {
   };
 
   me.init = function () {
+
+    var layerItemHtml = '<div class="layer">&mdash;</div>';
+
     vid = document.getElementById('vid');
     pop = Popcorn(vid);
     container = document.getElementById('source-container');
@@ -31,6 +34,44 @@ var LS = (function () {
 
     vid.loop = false;
     vid.playbackRate = 1;
+
+    // Hacky section to show the "layer indicators" at specific points.
+    var layerConfigArray = [
+        {
+          start: 0,
+          end: 1,
+          numLayers: 2
+        },
+        {
+          start: 1,
+          end: 2,
+          numLayers: 1
+        },
+        {
+          start: 2,
+          end: 6,
+          numLayers: 5
+        }
+      ],
+      layer,
+      layerString = '';
+
+    for (var i = 0, len = layerConfigArray.length; i < len; i++) {
+      layer = layerConfigArray[i];
+      pop.code({
+        start: layer.start,
+        end: layer.end,
+        numLayers: layer.numLayers,
+        onStart: function (options) {
+          _(options.numLayers).times(function (){ layerString += layerItemHtml; });
+          $('#layer-counter').html(layerString);
+        },
+        onEnd: function () {
+          $('#layer-counter').html('');
+          layerString = '';
+        }
+      });
+    }
 
     streetView.create();
 
@@ -50,7 +91,9 @@ var LS = (function () {
       me.play();
     });
 
-    //vid.play();
+
+
+    vid.play();
 
     $('.ls-anno-img').toggle(function () {
       var $el = $(this).addClass('large'),
@@ -90,7 +133,8 @@ var LS = (function () {
           zoomControl: false,
           enableCloseButton: false
         },
-        panorama;
+        panorama,
+        interval;
 
     return {
 
@@ -103,14 +147,21 @@ var LS = (function () {
       },
 
       update: function (lat, lng) {
+        var pov = panorama.getPov();
         if (!positionCache['' + lat + lng]) {
           positionCache['' + lat + lng] = new google.maps.LatLng(lat, lng);
         }
         panorama.setPosition(positionCache['' + lat + lng]);
         panorama.setVisible(true);
+        // Slowly pan the street view background.
+        interval = window.setInterval(function () {
+          pov.heading += 0.1;
+          panorama.setPov(pov);
+        }, 30);
       },
 
       hide: function () {
+        window.clearInterval(interval);
         panorama.setVisible(false);
         $('#background-container').css('background-color', 'black');
       }
