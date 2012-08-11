@@ -75,6 +75,11 @@ iframe {
 }
 .ls-anno-img {
   position: absolute;
+  opacity: 0.8;
+  cursor: pointer;
+}
+.ls-anno-img:hover {
+  opacity: 1;
 }
   .ls-anno-img img {
     width: 100%;
@@ -88,6 +93,7 @@ body .ls-anno-box .ls-anno-img.large {
   left: 0;
   width: 100%;
   height: 100%;
+  opacity: 1;
 }
   .ls-anno-img.large img {
     position: absolute;
