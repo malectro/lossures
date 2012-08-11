@@ -10,16 +10,23 @@ html, body {
 }
 
 
-/* Source video styling */
-#vid {
+#source-container {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
 }
 
+/* Source video styling */
+#vid {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
 /* Animation to minimize source video */
-#vid.minimize {
+#source-container.minimize {
   -webkit-animation: minimize 1s;
   top: 50%;
   left: 25%;
@@ -39,7 +46,7 @@ html, body {
 }
 
 /* Animation to maximize source video */
-#vid.maximize {
+#source-container.maximize {
   -webkit-animation: maximize 1s;
   top: 0%;
   left: 0%;

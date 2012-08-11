@@ -4,7 +4,8 @@ var LS = (function () {
 
   me.init = function () {
 
-    var vid = document.getElementById('vid');
+    var vid = document.getElementById('vid'),
+        container = document.getElementById('source-container');
 
     vid.loop = true;
     vid.playbackRate = 1;
@@ -12,16 +13,16 @@ var LS = (function () {
 
     $('#video-pause').on('click', function () {
       vid.pause();
-      vid.className = 'minimize';
+      container.className = 'minimize';
       $('#video-pause').hide();
       $('#video-play').show();
     });
 
     $('#video-play').on('click', function () {
-      vid.play();
-      vid.className = 'maximize';
+      container.className = 'maximize';
       $('#video-play').hide();
       $('#video-pause').show();
+      vid.play();
     });
 
   };
