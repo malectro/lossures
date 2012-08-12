@@ -16,7 +16,7 @@ var LS = (function () {
         media: []
       },
       {
-        cue: 46,
+        cue: 20,
         latitude: 40.709694,
         longitude: -73.954063,
         background_audio: "audio_outside_marta_1-2.mp3",
@@ -76,6 +76,13 @@ var LS = (function () {
             }
           }
         ]
+      },
+      {
+        cue: 46,
+        latitude: 40.709694,
+        longitude: -73.954063,
+        background_audio: "",
+        media: []
       },
       {
         cue: 47,
