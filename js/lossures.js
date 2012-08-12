@@ -84,8 +84,8 @@ var LS = (function () {
         media: [
           {
             type: "video",
-            src: "cemetary.mov",
-            width: 400,
+            src: "http://lossur.es/video/GOOGLE%20SOUTH%203RD-desktop.mp4",
+            width: 250,
             position: {
               x: 150,
               y: 120
@@ -96,8 +96,34 @@ var LS = (function () {
             }
           },
           {
+            type: "video",
+            src: "http://lossur.es/video/grito.mp4",
+            width: 250,
+            position: {
+              x: 300,
+              y: 100
+            },
+            video_position: {
+              x: 300,
+              y: 200
+            }
+          },
+          {
+            type: "video",
+            src: "http://lossur.es/video/1%20My%20view%20on%20Puerto%20Rican%20independence.mp4",
+            width: 250,
+            position: {
+              x: 600,
+              y: 150
+            },
+            video_position: {
+              x: 50,
+              y: 100
+            }
+          },
+          {
             type: "text",
-            caption: "I’m gonna deal with my problems here.\nI think for the kids they would have to choose. If they want to live in this neighborhood... or they wanna get out.  AND if they gonna live in the neighborhood, what-ta they gonna do to make it better. And If they’re going to get out, how they gonna prepare themselves to get out of it.... because it is very hard.",
+            caption: "When you live in an area like this all your life and this is all you really know. How do you get out of it. How do you get outta something, that this is all you know.",
             width: 280,
             position: {
               x: 800,
