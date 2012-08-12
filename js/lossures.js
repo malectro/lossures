@@ -31,7 +31,7 @@ var LS = (function () {
               y: 50
             },
             video_position: {
-              x: 180,
+              x: 160,
               y: 40
             }
           },
@@ -44,8 +44,8 @@ var LS = (function () {
               y: 140
             },
             video_position: {
-              x: 200,
-              y: 10
+              x: 300,
+              y: 200
             }
           },
           {
@@ -57,8 +57,8 @@ var LS = (function () {
               y: 214
             },
             video_position: {
-              x: 150,
-              y: 150
+              x: 100,
+              y: 100
             }
           },
           {
@@ -70,7 +70,7 @@ var LS = (function () {
               y: 416
             },
             video_position: {
-              x: 100,
+              x: 300,
               y: 100
             }
           }
