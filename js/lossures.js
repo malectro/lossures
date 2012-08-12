@@ -12,6 +12,7 @@ var LS = (function () {
         cue: 6.58,
         latitude: 40.709694,
         longitude: -73.954063,
+        background_audio: '',
         media: [
           {
             type: "video",
@@ -56,6 +57,9 @@ var LS = (function () {
       },
       {
         cue: 35.5,
+        latitude: 40.711841,
+        longitude: -73.947004,
+        background_audio: '',
         media: [
           {
             type: "video",
@@ -132,6 +136,7 @@ var LS = (function () {
       me.canvas.show(_scene);
     }, 1000);
     streetView.update(sceneData.latitude, sceneData.longitude);
+    me.music.play(_scene - 1);
   };
 
   me.play = function () {
@@ -142,6 +147,7 @@ var LS = (function () {
     $('.ls-anno-box').removeClass('fade-in');
     streetView.hide();
     me.canvas.hideAll();
+    me.music.stop(_scene - 1);
   };
 
   me.breakpoint = function () {
@@ -261,6 +267,7 @@ var LS = (function () {
     }
 
     streetView.create();
+    me.music.init();
 
     pop.on('pause', function () {
       console.log(pop.currentTime());
@@ -381,6 +388,73 @@ var LS = (function () {
     };
 
   };
+
+  me.music = (function () {
+
+    var _context,
+        _audioBuffers = [],
+        _source,
+        soundReady = [];
+
+    return {
+
+      init: function () {
+
+        try {
+          _context = new webkitAudioContext();
+        }
+        catch(e) {
+            alert('Web Audio API is not supported in this browser');
+        }
+
+        function loadTrack (url, index) {
+
+          var request = new XMLHttpRequest();
+
+          request.open('GET', url, true);
+          request.responseType = 'arraybuffer';
+
+          // Decode asynchronously
+          request.onload = function() {
+            _context.decodeAudioData(request.response, function (buffer) {
+              _audioBuffers[index] = buffer;
+              soundReady[index] = true;
+            });
+          }
+          request.send();
+
+        }
+
+        for (var i = 0, len = annotationData.breakpoints.length; i < len; i++) {
+          if (annotationData && annotationData.breakpoints[i].background_audio) {
+            loadTrack(annotationData.breakpoints[i].background_audio, i);
+          }
+        }
+
+      },
+
+      play: function (index) {
+
+        if (soundReady[index]) {
+          _source = _context.createBufferSource();
+          _source.buffer = _audioBuffers[index];
+          _source.connect(_context.destination);
+          _source.noteOn(0);
+        }
+
+      },
+
+      stop: function (index) {
+
+        if (soundReady[index]) {
+          _source.noteOff(0);
+        }
+
+      }
+
+    };
+
+  })();
 
   me.canvas = (function () {
 
