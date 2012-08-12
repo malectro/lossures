@@ -9,14 +9,14 @@ var LS = (function () {
     main_video: "http://lossur.es/video/marta_los_sures-desktop.mp4",
     breakpoints: [
       {
-        cue: 11,
+        cue: 1,
         latitude: 40.709694,
         longitude: -73.954063,
         background_audio: "",
         media: []
       },
       {
-        cue: 46,
+        cue: 10,
         latitude: 40.709694,
         longitude: -73.954063,
         background_audio: "audio_outside_marta_1-2.mp3",
@@ -25,7 +25,7 @@ var LS = (function () {
             type: "video",
             src: "http://lossur.es/video/my_building_qt-desktop.mp4",
             width: 420,
-            //thumbnail: "ThatsMyBuilding.png",
+            thumbnail: "img/ThatsMyBuilding.png",
             position: {
               x: 50,
               y: 50
@@ -64,7 +64,7 @@ var LS = (function () {
           {
             type: "video",
             src: "http://lossur.es/video/dummy_marta_before_cemetary.mp4",
-            thumbnail: "KeepItMoving.png",
+            thumbnail: "img/KeepItMoving.png",
             width: 420,
             position: {
               x: 807,
@@ -92,17 +92,17 @@ var LS = (function () {
               y: 20
             },
             video_position: {
-              x: 10,
-              y: 10
+              x: 30,
+              y: 30
             }
           },
           {
             type: "video",
             src: "http://lossur.es/video/grito.mp4",
-            thumbnail: "GritodeLares.png",
-            width: 250,
+            thumbnail: "img/GritodeLares.png",
+            width: 420,
             position: {
-              x: 300,
+              x: 350,
               y: 100
             },
             video_position: {
@@ -113,10 +113,11 @@ var LS = (function () {
           {
             type: "video",
             src: "http://lossur.es/video/1%20My%20view%20on%20Puerto%20Rican%20independence.mp4",
-            width: 250,
+            width: 420,
+            thumbnail: "img/PuertoRicanindependence.png",
             position: {
-              x: 600,
-              y: 150
+              x: 750,
+              y: 450
             },
             video_position: {
               x: 50,
@@ -132,8 +133,8 @@ var LS = (function () {
               y: 140
             },
             video_position: {
-              x: 10,
-              y: 10
+              x: 200,
+              y: 150
             }
           }
         ]
