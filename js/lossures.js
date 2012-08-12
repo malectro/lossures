@@ -147,6 +147,9 @@ var LS = (function () {
     if (streetView) {
       streetView.hide();
     }
+    _.delay(function () {
+      $('.ls-anno-box').hide();
+    }, 1000);
     me.canvas.hideAll();
     me.music.stop(_scene - 1);
   };
@@ -225,13 +228,12 @@ var LS = (function () {
     });
 
     $('.ls-anno-object').hover(function () {
+      me.canvas.fadeOut();
       $(this).css('-webkit-transform', 'scale(1)');
     }, function () {
+      me.canvas.fadeIn(_scene);
       $(this).css('-webkit-transform', 'scale(0.8)');
     });
-
-    me.fullscreen();
-    vid.play();
 
     //light box
     $('.ls-anno-img').toggle(function () {
@@ -272,6 +274,9 @@ var LS = (function () {
         pop.play();
       }, stop);
     });
+
+    me.fullscreen();
+    vid.play();
   };
 
   me.init = function () {
@@ -475,11 +480,19 @@ var LS = (function () {
       },
 
       show: function (index) {
-        $('#line-canvas-' + index).addClass('fade-in');
+        $('#line-canvas-' + index).fadeIn();
       },
 
       hideAll: function () {
-        $('canvas').removeClass('fade-in');
+        $('canvas').hide();
+      },
+
+      fadeOut: function () {
+        $('canvas').fadeOut();
+      },
+
+      fadeIn: function (index) {
+        $('#line-canvas-' + index).fadeIn();
       },
 
       drawLines: function (media, index) {
