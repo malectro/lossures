@@ -132,7 +132,6 @@ var LS = (function () {
     console.log(_scene);
     setTimeout(function () {
       $('.ls-pause-' + _scene).addClass('fade-in');
-      me.drawPassthroughs();
       me.canvas.show(_scene);
     }, 1000);
     streetView.update(sceneData.latitude, sceneData.longitude);

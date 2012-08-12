@@ -101,6 +101,10 @@ iframe {
 
 
 /* annotation objects */
+.ls-anno-box {
+  position: absolute;
+  z-index: 15;
+}
 .ls-anno-object {
   position: absolute;
   z-index: 2;
