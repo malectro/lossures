@@ -47,18 +47,38 @@ iframe {
   -webkit-animation: minimize 1s;
   top: 60%;
   left: 10%;
-  width: 350px;
+  width: 25%;
 }
 @-webkit-keyframes minimize {
   from {
     top: 0%;
     left: 0%;
-    width: 768px;
+    width: 100%;
   }
   to {
     top: 60%;
     left: 10%;
-    width: 350px;
+    width: 25%;
+  }
+}
+
+/* Animation to maximize source video */
+#source-container.maximize {
+  -webkit-animation: maximize 1s;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+}
+@-webkit-keyframes maximize {
+  from {
+    top: 60%;
+    left: 10%;
+    width: 25%;
+  }
+  to {
+    top: 0;
+    left: 0;
+    width: 100%;
   }
 }
 
@@ -153,26 +173,6 @@ body .ls-anno-box .ls-anno-img.large {
   }
   to {
     opacity: 1;
-  }
-}
-
-/* Animation to maximize source video */
-#source-container.maximize {
-  -webkit-animation: maximize 1s;
-  top: 0%;
-  left: 0%;
-  width: 100%;
-}
-@-webkit-keyframes maximize {
-  from {
-    top: 50%;
-    left: 25%;
-    width: 50%;
-  }
-  to {
-    top: 0%;
-    left: 0%;
-    width: 100%;
   }
 }
 
