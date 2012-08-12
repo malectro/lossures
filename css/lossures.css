@@ -248,3 +248,15 @@ body .ls-anno-box .ls-anno-img.large {
       cursor: pointer;
     }
 
+#canvas-container canvas {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 10;
+  display: none;
+}
+  #canvas-container canvas.fade-in {
+    display: block;
+  }

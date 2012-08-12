@@ -20,8 +20,8 @@ var LS = (function () {
               y: 20
             },
             video_position: {
-              x: 10,
-              y: 10
+              x: 70,
+              y: 100
             }
           },
           {
@@ -33,7 +33,7 @@ var LS = (function () {
               y: 20
             },
             video_position: {
-              x: 10,
+              x: 200,
               y: 10
             }
           },
@@ -46,8 +46,8 @@ var LS = (function () {
               y: 20
             },
             video_position: {
-              x: 10,
-              y: 10
+              x: 150,
+              y: 250
             }
           }
         ]
@@ -66,6 +66,7 @@ var LS = (function () {
     $('#video-play').show();
     setTimeout(function () {
       $('.ls-pause-' + _scene).addClass('fade-in');
+      me.canvas.show(_scene);
     }, 1000);
     streetView.update(40.711626, -73.960094);  // TODO - dbow - update with dynamic latitude and longitude.
   };
@@ -77,6 +78,7 @@ var LS = (function () {
     vid.play();
     $('.ls-anno-box').removeClass('fade-in');
     streetView.hide();
+    me.canvas.hideAll();
   };
 
   me.breakpoint = function () {
@@ -126,6 +128,8 @@ var LS = (function () {
       i++;
       var $wrapper = $('<div class="ls-anno-box faded ls-pause-' + i + '"/>');
 
+      me.canvas.create(i);
+
       _.each(breakpoint.media, function (medium) {
         var $medium;
 
@@ -139,6 +143,8 @@ var LS = (function () {
         $medium.css({left: medium.position.x, top: medium.position.y, width: medium.width})
           .addClass('ls-anno-object').appendTo($wrapper);
       });
+
+      me.canvas.drawLines(breakpoint.media, i);
 
       $('#main').append($wrapper);
       pop.cue(breakpoint.cue, me.breakpoint);
@@ -201,8 +207,6 @@ var LS = (function () {
     $('#video-play').on('click', function () {
       me.play();
     });
-
-
 
     vid.play();
 
@@ -304,6 +308,61 @@ var LS = (function () {
     };
 
   };
+
+  me.canvas = (function () {
+
+    return {
+
+      create: function (index) {
+        $('#canvas-container').append('<canvas id="line-canvas-' + index + '"></canvas>');
+      },
+
+      show: function (index) {
+        $('#line-canvas-' + index).addClass('fade-in');
+      },
+
+      hideAll: function () {
+        $('canvas').removeClass('fade-in');
+      },
+
+      drawLines: function (media, index) {
+
+        var cvs = document.getElementById('line-canvas-' + index),
+            ctx = cvs.getContext('2d'),
+            minVidX,
+            minVidY;
+
+        cvs.width = $(window).width();
+        cvs.height = $(window).height();
+
+        minVidX = cvs.width*0.1;
+        minVidY = cvs.height*0.6;
+
+        ctx.lineWidth = 0.5;
+
+        _.each(media, function (item, i) {
+
+          var startX = Math.round(minVidX + item.video_position.x),
+              startY = Math.round(minVidY + item.video_position.y),
+              endX = Math.round(item.position.x + (item.width / 2)),
+              endY = Math.round(item.position.y + 50);
+
+          ctx.beginPath();
+          ctx.moveTo(startX, startY);
+          ctx.lineTo(endX, endY);
+          ctx.strokeStyle = '#fff';
+          ctx.fillStyle = '#fff';
+          ctx.stroke();
+
+        });
+
+        console.log(media);
+
+      }
+
+    };
+
+  })();
 
   return me;
 
