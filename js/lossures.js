@@ -9,7 +9,7 @@ var LS = (function () {
     main_video: "http://lossur.es/video/marta_los_sures-desktop.mp4",
     breakpoints: [
       {
-        cue: 1,
+        cue: 11,
         latitude: 40.709694,
         longitude: -73.954063,
         background_audio: "",
@@ -19,7 +19,7 @@ var LS = (function () {
         cue: 46,
         latitude: 40.709694,
         longitude: -73.954063,
-        background_audio: "http://lossur.es/video/audio_outside_marta_1-2.mp3",
+        background_audio: "audio_outside_marta_1-2.mp3",
         media: [
           {
             type: "video",
@@ -80,7 +80,7 @@ var LS = (function () {
         cue: 47,
         latitude: 40.711841,
         longitude: -73.947004,
-        background_audio: 'http://lossur.es/video/soundscape_greenlight.mp3',
+        background_audio: "soundscape_greenlight.mp3",
         media: [
           {
             type: "video",
