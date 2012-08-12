@@ -259,7 +259,10 @@ var LS = (function () {
       me.canvas.fadeOut();
       $(this).css('-webkit-transform', 'scale(1)');
     }, function () {
-      me.canvas.fadeIn(_scene);
+      //hax
+      if ($('body').hasClass('paused')) {
+        me.canvas.fadeIn(_scene);
+      }
       $(this).css('-webkit-transform', 'scale(0.8)');
     });
 
