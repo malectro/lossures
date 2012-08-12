@@ -14,6 +14,18 @@ iframe {
   padding: 0;
 }
 
+#landing_container {
+  position: relative;
+}
+#landing_image {
+  margin: 0 auto;
+  position: relative;
+  top: 235px;
+  background-image: url("../img/TITLE.gif");
+  width: 1185px;
+  height: 346px;
+}
+
 #logo {
   z-index: 100;
   position: absolute;
