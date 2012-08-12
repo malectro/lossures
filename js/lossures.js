@@ -53,6 +53,37 @@ var LS = (function () {
             }
           }
         ]
+      },
+      {
+        cue: 35.5,
+        media: [
+          {
+            type: "video",
+            src: "cemetary.mov",
+            width: 400,
+            position: {
+              x: 50,
+              y: 20
+            },
+            video_position: {
+              x: 10,
+              y: 10
+            }
+          },
+          {
+            type: "text",
+            caption: "I’m gonna deal with my problems here.\nI think for the kids they would have to choose. If they want to live in this neighborhood... or they wanna get out.  AND if they gonna live in the neighborhood, what-ta they gonna do to make it better. And If they’re going to get out, how they gonna prepare themselves to get out of it.... because it is very hard.",
+            width: 280,
+            position: {
+              x: 900,
+              y: 20
+            },
+            video_position: {
+              x: 10,
+              y: 10
+            }
+          }
+        ]
       }
     ]
   };
@@ -67,6 +98,7 @@ var LS = (function () {
     container.className = 'minimize';
     $('#video-pause').hide();
     $('#video-play').show();
+    console.log(_scene);
     setTimeout(function () {
       $('.ls-pause-' + _scene).addClass('fade-in');
       me.canvas.show(_scene);
@@ -101,7 +133,7 @@ var LS = (function () {
     },
     text: function (medium) {
       var $medium = $('<div class="ls-anno-text"/>');
-      return $medium.text(medium.caption);
+      return $medium.html(medium.caption.replace("\n", "<br/>"));
     },
     img: function (medium) {
       var $image = $('<img class="ls-anno-img"/>');
@@ -144,13 +176,39 @@ var LS = (function () {
         }
 
         $medium.css({left: medium.position.x, top: medium.position.y, width: medium.width})
-          .addClass('ls-anno-object').appendTo($wrapper);
+          .addClass('ls-anno-object passthrough').appendTo($wrapper);
       });
 
       me.canvas.drawLines(breakpoint.media, i);
 
       $('#main').append($wrapper);
       pop.cue(breakpoint.cue, me.breakpoint);
+    });
+
+    $('.ls-anno-object').hover(function () {
+      $(this).css('-webkit-transform', 'scale(1)');
+    }, function () {
+      $(this).css('-webkit-transform', 'scale(0.8)');
+    });
+
+    // major canvas hack
+    $('.passer').remove();
+    $('.passthrough').each(function () {
+      var $el = $(this),
+          pos = $el.offset(),
+          $passer = $('<div/>');
+
+          pos.width = $el.width() * 0.8;
+          pos.height = $el.height() * 0.8;
+          pos.padding = $el.css('padding');
+
+          $passer.addClass('passer').css(pos).hover(function () {
+            $el.mouseenter();
+          }, function () {
+            $el.mouseleave();
+          }).click(function () {
+            $el.click();
+          }).appendTo('body');
     });
 
     // Hacky section to show the "layer indicators" at specific points.
@@ -198,9 +256,11 @@ var LS = (function () {
       console.log(pop.currentTime());
     });
 
+    /*
     pop.cue(6.58, me.breakpoint);
     pop.cue(35.5, me.breakpoint);
     pop.cue(46, me.breakpoint);
+    */
 
     $('#video-pause').on('click', function () {
       _paused = true;
@@ -247,13 +307,10 @@ var LS = (function () {
         stop();
       });
 
-      $(this).click(function () {
-        if (pop.playing) {
-          return stop();
-        }
+      $(this).hover(function () {
         pop.playing = true;
         pop.play();
-      });
+      }, stop);
     })
   };
 

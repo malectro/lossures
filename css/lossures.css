@@ -84,6 +84,11 @@ iframe {
 .ls-anno-object {
   position: absolute;
   z-index: 2;
+  -webkit-transition: 200ms -webkit-transform linear;
+  -webkit-transform: scale(0.8);
+  /*
+  -webkit-transition: 200ms width linear, 200ms height linear, 200ms top linear, 200ms left linear;
+  */
 }
 .ls-anno-vid {
   cursor: pointer;
@@ -136,7 +141,6 @@ body .ls-anno-box .ls-anno-img.large {
 /* animations */
 .faded {
   opacity: 0;
-  display: none;
 }
 .fade-in {
   -webkit-animation: fade-in 500ms;
@@ -260,3 +264,10 @@ body .ls-anno-box .ls-anno-img.large {
   #canvas-container canvas.fade-in {
     display: block;
   }
+
+.passer {
+  position: absolute;
+  visibility: hidden;
+  z-index: 11;
+  outline: 1px solid black;
+}
