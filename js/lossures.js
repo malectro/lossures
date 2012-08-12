@@ -32,8 +32,8 @@ var LS = (function () {
             caption: "I don’t find the need to leave williamsburg to move to another area... so that I can solve my problems.",
             width: 280,
             position: {
-              x: 900,
-              y: 20
+              x: 550,
+              y: 240
             },
             video_position: {
               x: 200,
@@ -45,8 +45,8 @@ var LS = (function () {
             src: "http://beta.zeega.org/41272",
             width: 200,
             position: {
-              x: 550,
-              y: 20
+              x: 950,
+              y: 620
             },
             video_position: {
               x: 150,
@@ -66,8 +66,8 @@ var LS = (function () {
             src: "cemetary.mov",
             width: 400,
             position: {
-              x: 50,
-              y: 20
+              x: 150,
+              y: 120
             },
             video_position: {
               x: 10,
@@ -79,8 +79,8 @@ var LS = (function () {
             caption: "I’m gonna deal with my problems here.\nI think for the kids they would have to choose. If they want to live in this neighborhood... or they wanna get out.  AND if they gonna live in the neighborhood, what-ta they gonna do to make it better. And If they’re going to get out, how they gonna prepare themselves to get out of it.... because it is very hard.",
             width: 280,
             position: {
-              x: 900,
-              y: 20
+              x: 800,
+              y: 220
             },
             video_position: {
               x: 10,
