@@ -6,34 +6,42 @@ var LS = (function () {
       vid, pop, container, streetView;
 
   var annotationData = {
-    main_video: "main_vid.mp4",
+    main_video: "http://lossur.es/video/marta_los_sures-desktop.mp4",
     breakpoints: [
       {
-        cue: 6.58,
+        cue: 1,
         latitude: 40.709694,
         longitude: -73.954063,
-        background_audio: '',
+        background_audio: "",
+        media: []
+      },
+      {
+        cue: 46,
+        latitude: 40.709694,
+        longitude: -73.954063,
+        background_audio: "http://lossur.es/video/audio_outside_marta_1-2.mp3",
         media: [
           {
             type: "video",
-            src: "anno_vid1.mp4",
-            width: 400,
+            src: "http://lossur.es/video/my_building_qt-desktop.mp4",
+            width: 420,
+            thumbnail: "img/ThatsMyBuilding.png",
             position: {
               x: 50,
-              y: 20
+              y: 50
             },
             video_position: {
-              x: 70,
-              y: 100
+              x: 180,
+              y: 40
             }
           },
           {
             type: "text",
-            caption: "I don’t find the need to leave williamsburg to move to another area... so that I can solve my problems.",
+            caption: "I don’t find the need to leave williamsburg to move to another area... so that I can solve my problems. I’m gonna deal with my problems here.",
             width: 280,
             position: {
-              x: 550,
-              y: 240
+              x: 870,
+              y: 140
             },
             video_position: {
               x: 200,
@@ -42,24 +50,37 @@ var LS = (function () {
           },
           {
             type: "zeega",
-            src: "http://beta.zeega.org/41272",
-            width: 200,
+            src: "http://alpha.zeega.org/41272",
+            width: 320,
             position: {
-              x: 950,
-              y: 620
+              x: 548,
+              y: 214
             },
             video_position: {
               x: 150,
-              y: 250
+              y: 150
+            }
+          },
+          {
+            type: "video",
+            src: "http://lossur.es/video/dummy_marta_before_cemetary.mp4",
+            width: 420,
+            position: {
+              x: 807,
+              y: 416
+            },
+            video_position: {
+              x: 100,
+              y: 100
             }
           }
         ]
       },
       {
-        cue: 35.5,
+        cue: 47,
         latitude: 40.711841,
         longitude: -73.947004,
-        background_audio: '',
+        background_audio: 'http://lossur.es/video/soundscape_greenlight.mp3',
         media: [
           {
             type: "video",
@@ -80,7 +101,7 @@ var LS = (function () {
             width: 280,
             position: {
               x: 800,
-              y: 220
+              y: 140
             },
             video_position: {
               x: 10,
