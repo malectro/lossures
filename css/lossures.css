@@ -203,14 +203,46 @@ body .ls-anno-box .ls-anno-img.large {
     font-size: 50px;
   }
 
+  #layer-label {
+    float: left;
+    font-size: 20px;
+    margin: 10px 0px 0px 50px;
+    position: relative;
+    top: 40px;
+    left: 51px;
+  }
   #layer-counter {
     float: left;
     font-size: 60px;
-    margin: 0px 0px 30px 50px;
+    position: relative;
+    height: 50px;
+    width: 50px;
   }
     #layer-counter div {
-      line-height: 10px;
+     height: 6px;
+     position: absolute;
+     background-color: white;
+     width: 34px;
+     left: 6px;
     }
+
+  /* Animation to give glow effect when layer is updated */
+  .layer.glow {
+   -webkit-animation: glow 1s;
+   -webkit-box-shadow: 0px 0px 0px 0px #FFF966; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    box-shadow: 0px 0px 0px 0px #FFF966; /* Opera 10.5, IE9, Firefox 4+, Chrome 6+, iOS 5 */
+  }
+  @-webkit-keyframes glow {
+    from {
+     -webkit-box-shadow: 0px 0px 12px 1px #FFF966; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+      box-shadow: 0px 0px 12px 1px #FFF966; /* Opera 10.5, IE9, Firefox 4+, Chrome 6+, iOS 5 */
+    }
+    to {
+     -webkit-box-shadow: 0px 0px 0px 0px #FFF966; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+      box-shadow: 0px 0px 0px 0px #FFF966; /* Opera 10.5, IE9, Firefox 4+, Chrome 6+, iOS 5 */
+
+    }
+  }
 
   #video-pause {
     float: right;

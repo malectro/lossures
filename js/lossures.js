@@ -39,7 +39,7 @@ var LS = (function () {
 
   me.init = function () {
 
-    var layerItemHtml = '<div class="layer">&mdash;</div>';
+    var layerItemHtml = '<div class="layer"></div>';
 
     vid = document.getElementById('vid');
     pop = Popcorn(vid);
@@ -67,8 +67,7 @@ var LS = (function () {
           numLayers: 1
         }
       ],
-      layer,
-      layerString = '';
+      layer;
 
     for (var i = 0, len = layerConfigArray.length; i < len; i++) {
       layer = layerConfigArray[i];
@@ -77,12 +76,14 @@ var LS = (function () {
         end: layer.end,
         numLayers: layer.numLayers,
         onStart: function (options) {
-          _(options.numLayers).times(function (){ layerString += layerItemHtml; });
-          $('#layer-counter').html(layerString);
+          $('#layer-counter').html('');
+          _(options.numLayers).times(function (n){ $('#layer-counter').append($(layerItemHtml).css('bottom', n*12)); });
+          $('.layer').addClass('glow');
         },
         onEnd: function () {
           $('#layer-counter').html('');
           layerString = '';
+          $('.layer').removeClass('glow');
         }
       });
     }
