@@ -184,6 +184,7 @@ body .ls-anno-box .ls-anno-img.large {
   height: 100px;
   left: 0px;
   right: 0px;
+  z-index: 20;
 }
 
   #video-controls div {
@@ -267,7 +268,7 @@ body .ls-anno-box .ls-anno-img.large {
 
 .passer {
   position: absolute;
-  visibility: hidden;
+  opacity: 0;
   z-index: 11;
   outline: 1px solid black;
 }

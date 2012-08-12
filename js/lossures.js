@@ -90,6 +90,33 @@ var LS = (function () {
 
   me.nextScene = function () {
     _scene++;
+
+  };
+
+  me.drawPassthroughs = function () {
+    $('.passer').remove();
+    $('.passthrough').each(function () {
+      var $el = $(this),
+          pos = $el.offset(),
+          $passer = $('<div/>');
+
+      if (!$el.parent().hasClass('fade-in')) {
+        return;
+      }
+
+      pos.width = $el.width() * 0.8;
+      pos.height = $el.height() * 0.8;
+      pos.padding = $el.css('padding');
+
+      $passer.addClass('passer').css(pos).hover(function () {
+        console.log('passer hover');
+        $el.mouseenter();
+      }, function () {
+        $el.mouseleave();
+      }).click(function () {
+        $el.click();
+      }).appendTo('body');
+    });
   };
 
   me.pause = function () {
@@ -101,6 +128,7 @@ var LS = (function () {
     console.log(_scene);
     setTimeout(function () {
       $('.ls-pause-' + _scene).addClass('fade-in');
+      me.drawPassthroughs();
       me.canvas.show(_scene);
     }, 1000);
     streetView.update(sceneData.latitude, sceneData.longitude);
@@ -192,24 +220,6 @@ var LS = (function () {
     });
 
     // major canvas hack
-    $('.passer').remove();
-    $('.passthrough').each(function () {
-      var $el = $(this),
-          pos = $el.offset(),
-          $passer = $('<div/>');
-
-          pos.width = $el.width() * 0.8;
-          pos.height = $el.height() * 0.8;
-          pos.padding = $el.css('padding');
-
-          $passer.addClass('passer').css(pos).hover(function () {
-            $el.mouseenter();
-          }, function () {
-            $el.mouseleave();
-          }).click(function () {
-            $el.click();
-          }).appendTo('body');
-    });
 
     // Hacky section to show the "layer indicators" at specific points.
     var layerConfigArray = [
