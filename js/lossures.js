@@ -145,6 +145,13 @@ var LS = (function () {
   };
 
   me.fullscreen = function () {
+    if (!$('body').hasClass('paused')) {
+      $('.ls-anno-box').hide();
+      _.delay(function () {
+        $('#layer-boxes').fadeIn();
+      }, 1000);
+      return;
+    }
     container.className = 'maximize';
     $('#video-play').hide();
     $('#video-pause').show();
