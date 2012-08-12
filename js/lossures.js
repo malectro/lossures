@@ -130,8 +130,9 @@ var LS = (function () {
     $('#video-pause').hide();
     $('#video-play').show();
     console.log(_scene);
+    $('.ls-anno-box').hide();
     setTimeout(function () {
-      $('.ls-pause-' + _scene).addClass('fade-in');
+      $('.ls-pause-' + _scene).show().addClass('fade-in');
       me.canvas.show(_scene);
     }, 1000);
     streetView.update(sceneData.latitude, sceneData.longitude);
