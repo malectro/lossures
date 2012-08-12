@@ -25,7 +25,7 @@ var LS = (function () {
             type: "video",
             src: "http://lossur.es/video/my_building_qt-desktop.mp4",
             width: 420,
-            thumbnail: "img/ThatsMyBuilding.png",
+            thumbnail: "ThatsMyBuilding.png",
             position: {
               x: 50,
               y: 50
@@ -64,6 +64,7 @@ var LS = (function () {
           {
             type: "video",
             src: "http://lossur.es/video/dummy_marta_before_cemetary.mp4",
+            thumbnail: "KeepItMoving.png",
             width: 420,
             position: {
               x: 807,
@@ -87,8 +88,8 @@ var LS = (function () {
             src: "http://lossur.es/video/GOOGLE%20SOUTH%203RD-desktop.mp4",
             width: 250,
             position: {
-              x: 150,
-              y: 120
+              x: 20,
+              y: 20
             },
             video_position: {
               x: 10,
@@ -98,6 +99,7 @@ var LS = (function () {
           {
             type: "video",
             src: "http://lossur.es/video/grito.mp4",
+            thumbnail: "GritodeLares.png",
             width: 250,
             position: {
               x: 300,
@@ -234,6 +236,9 @@ var LS = (function () {
       var $medium = $('<video class="ls-anno-vid"/>');
       $medium[0].preload = 'auto';
       $medium[0].src = medium.src;
+      if (medium.thumbnail) {
+        $medium[0].poster = medium.thumbnail;
+      }
       return $medium;
     },
     text: function (medium) {
@@ -341,7 +346,9 @@ var LS = (function () {
     });
 
     $('.ls-anno-vid').each(function () {
-      var pop = Popcorn(this),
+      var pop = Popcorn(this, {
+            poster: this.poster
+          }),
           $vid = $(this);
 
       function stop() {
