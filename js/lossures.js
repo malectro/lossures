@@ -10,6 +10,8 @@ var LS = (function () {
     breakpoints: [
       {
         cue: 6.58,
+        latitude: 40.709694,
+        longitude: -73.954063,
         media: [
           {
             type: "video",
@@ -60,6 +62,7 @@ var LS = (function () {
   };
 
   me.pause = function () {
+    var sceneData = annotationData.breakpoints[_scene - 1];
     vid.pause();
     container.className = 'minimize';
     $('#video-pause').hide();
@@ -68,7 +71,7 @@ var LS = (function () {
       $('.ls-pause-' + _scene).addClass('fade-in');
       me.canvas.show(_scene);
     }, 1000);
-    streetView.update(40.711626, -73.960094);  // TODO - dbow - update with dynamic latitude and longitude.
+    streetView.update(sceneData.latitude, sceneData.longitude);
   };
 
   me.play = function () {
@@ -278,9 +281,12 @@ var LS = (function () {
     return {
 
       create: function () {
+        var firstBreak = annotationData && annotationData.breakpoints ? annotationData.breakpoints[0] : null,
+            defaultLat = firstBreak ? firstBreak.latitude : 40.709694,
+            defaultLong = firstBreak ? firstBreak.longitude : -73.954063;
         panorama = new google.maps.StreetViewPanorama(document.getElementById('background-container'),
                                                       panoramaOptions);
-        panorama.setPosition(new google.maps.LatLng(40.711626, -73.960094));
+        panorama.setPosition(new google.maps.LatLng(defaultLat, defaultLong));
         panorama.setVisible(false);
         $('#background-container').css('background-color', 'black');
       },
@@ -355,8 +361,6 @@ var LS = (function () {
           ctx.stroke();
 
         });
-
-        console.log(media);
 
       }
 
