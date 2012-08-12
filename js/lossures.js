@@ -25,7 +25,7 @@ var LS = (function () {
             type: "video",
             src: "http://lossur.es/video/my_building_qt-desktop.mp4",
             width: 420,
-            thumbnail: "ThatsMyBuilding.png",
+            //thumbnail: "ThatsMyBuilding.png",
             position: {
               x: 50,
               y: 50
