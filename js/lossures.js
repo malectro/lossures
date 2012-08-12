@@ -5,6 +5,56 @@ var LS = (function () {
       _paused = false,
       vid, pop, container, streetview;
 
+  var annotationData = {
+    main_video: "main_vid.mp4",
+    breakpoints: [
+      {
+        cue: 6.58,
+        media: [
+          {
+            type: "video",
+            src: "anno_vid1.mp4",
+            width: 400,
+            position: {
+              x: 50,
+              y: 20
+            },
+            video_position: {
+              x: 10,
+              y: 10
+            }
+          },
+          {
+            type: "text",
+            caption: "I don’t find the need to leave williamsburg to move to another area... so that I can solve my problems.",
+            width: 280,
+            position: {
+              x: 900,
+              y: 20
+            },
+            video_position: {
+              x: 10,
+              y: 10
+            }
+          },
+          {
+            type: "zeega",
+            src: "http://beta.zeega.org/41272",
+            width: 200,
+            position: {
+              x: 550,
+              y: 20
+            },
+            video_position: {
+              x: 10,
+              y: 10
+            }
+          }
+        ]
+      }
+    ]
+  };
+
   me.nextScene = function () {
     _scene++;
   };
@@ -37,17 +87,62 @@ var LS = (function () {
     setTimeout(me.nextScene, 1500);
   };
 
+  me.mediaFactory = {
+    video: function (medium) {
+      var $medium = $('<video class="ls-anno-vid"/>');
+      $medium[0].preload = 'auto';
+      $medium[0].src = medium.src;
+      return $medium;
+    },
+    text: function (medium) {
+      var $medium = $('<div class="ls-anno-text"/>');
+      return $medium.text(medium.caption);
+    },
+    img: function (medium) {
+      var $image = $('<img class="ls-anno-img"/>');
+      return $image.attr('src', medium.src);
+    },
+    zeega: function (medium) {
+      var $zeega = $('<iframe class="ls-anno-zeega"/>');
+      return $zeega.attr('src', medium.src);
+    }
+  };
+
   me.init = function () {
 
     var layerItemHtml = '<div class="layer"></div>';
 
     vid = document.getElementById('vid');
-    pop = Popcorn(vid);
     container = document.getElementById('source-container');
     streetView = me.streetView();
 
+    vid.src = annotationData.main_video;
     vid.loop = false;
     vid.playbackRate = 1;
+
+    pop = Popcorn(vid);
+
+    _.each(annotationData.breakpoints, function (breakpoint, i) {
+      i++;
+      var $wrapper = $('<div class="ls-anno-box faded ls-pause-' + i + '"/>');
+
+      _.each(breakpoint.media, function (medium) {
+        var $medium;
+
+        if (me.mediaFactory[medium.type]) {
+          $medium = me.mediaFactory[medium.type](medium);
+        }
+        else {
+          $medium = $('<div/>').hide();
+        }
+
+        $medium.css({left: medium.position.x, top: medium.position.y, width: medium.width})
+          .addClass('ls-anno-object').appendTo($wrapper);
+      });
+
+      $('#main').append($wrapper);
+      pop.cue(breakpoint.cue, me.breakpoint);
+    });
 
     // Hacky section to show the "layer indicators" at specific points.
     var layerConfigArray = [
@@ -132,14 +227,18 @@ var LS = (function () {
     });
 
     $('.ls-anno-vid').each(function () {
-      var pop = Popcorn(this);
+      var pop = Popcorn(this),
+          $vid = $(this);
 
       function stop() {
         pop.playing = false;
         pop.pause();
       }
 
-      pop.on('ended', stop);
+      pop.on('ended', function () {
+        $vid.fadeOut(200);
+        stop();
+      });
 
       $(this).click(function () {
         if (pop.playing) {
