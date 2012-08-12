@@ -3,7 +3,7 @@ var LS = (function () {
   var me = {},
       _scene = 1,
       _paused = false,
-      vid, pop, container, streetview;
+      vid, pop, container, streetView;
 
   var annotationData = {
     main_video: "main_vid.mp4",
@@ -139,15 +139,21 @@ var LS = (function () {
     me.music.play(_scene - 1);
   };
 
-  me.play = function () {
+  me.fullscreen = function () {
     container.className = 'maximize';
     $('#video-play').hide();
     $('#video-pause').show();
-    vid.play();
     $('.ls-anno-box').removeClass('fade-in');
-    streetView.hide();
+    if (streetView) {
+      streetView.hide();
+    }
     me.canvas.hideAll();
     me.music.stop(_scene - 1);
+  };
+
+  me.play = function () {
+    me.fullscreen();
+    vid.play();
   };
 
   me.breakpoint = function () {
@@ -179,14 +185,13 @@ var LS = (function () {
     }
   };
 
-  me.init = function () {
-
-    var layerItemHtml = '<div class="layer"></div>';
+  me.reset = function () {
+    _scene = 1;
 
     vid = document.getElementById('vid');
     container = document.getElementById('source-container');
-    streetView = me.streetView();
 
+    vid.src = '';
     vid.src = annotationData.main_video;
     vid.loop = false;
     vid.playbackRate = 1;
@@ -225,7 +230,56 @@ var LS = (function () {
       $(this).css('-webkit-transform', 'scale(0.8)');
     });
 
-    // major canvas hack
+    me.fullscreen();
+    vid.play();
+
+    //light box
+    $('.ls-anno-img').toggle(function () {
+      var $el = $(this).addClass('large'),
+          $w = $(window),
+          $img = $('img', $el),
+          top = ($w.height() - $img.height()) / 2,
+          left = ($w.width() - $img.width()) / 2;
+
+      if (top < 0) {
+        top = 0;
+      }
+      if (left < 0) {
+        left = 0;
+      }
+
+      $img.css({top: top, left: left});
+    }, function () {
+      $(this).removeClass('large');
+    });
+
+    $('.ls-anno-vid').each(function () {
+      var pop = Popcorn(this),
+          $vid = $(this);
+
+      function stop() {
+        pop.playing = false;
+        pop.pause();
+      }
+
+      pop.on('ended', function () {
+        $vid.fadeOut(200);
+        stop();
+      });
+
+      $(this).hover(function () {
+        pop.playing = true;
+        pop.play();
+      }, stop);
+    });
+  };
+
+  me.init = function () {
+
+    var layerItemHtml = '<div class="layer"></div>';
+
+    me.reset();
+    streetView = me.streetView();
 
     // Hacky section to show the "layer indicators" at specific points.
     var layerConfigArray = [
@@ -269,10 +323,6 @@ var LS = (function () {
     streetView.create();
     me.music.init();
 
-    pop.on('pause', function () {
-      console.log(pop.currentTime());
-    });
-
     /*
     pop.cue(6.58, me.breakpoint);
     pop.cue(35.5, me.breakpoint);
@@ -288,47 +338,7 @@ var LS = (function () {
       me.play();
     });
 
-    vid.play();
 
-    //light box
-    $('.ls-anno-img').toggle(function () {
-      var $el = $(this).addClass('large'),
-          $w = $(window),
-          $img = $('img', $el),
-          top = ($w.height() - $img.height()) / 2,
-          left = ($w.width() - $img.width()) / 2;
-
-      if (top < 0) {
-        top = 0;
-      }
-      if (left < 0) {
-        left = 0;
-      }
-
-      $img.css({top: top, left: left});
-    }, function () {
-      $(this).removeClass('large');
-    });
-
-    $('.ls-anno-vid').each(function () {
-      var pop = Popcorn(this),
-          $vid = $(this);
-
-      function stop() {
-        pop.playing = false;
-        pop.pause();
-      }
-
-      pop.on('ended', function () {
-        $vid.fadeOut(200);
-        stop();
-      });
-
-      $(this).hover(function () {
-        pop.playing = true;
-        pop.play();
-      }, stop);
-    })
   };
 
   me.streetView = function () {
@@ -508,6 +518,28 @@ var LS = (function () {
     };
 
   })();
+
+  me.openForm = function () {
+    $('.edit-form textarea').val(JSON.stringify(annotationData, null, "  "));
+    $('.edit-form').fadeIn();
+  };
+
+  $('.edit-form').submit(function () {
+    annotationData = JSON.parse($('textarea', this).val());
+    $('.ls-anno-box').remove();
+    $(this).fadeOut();
+    me.init();
+    return false;
+  }).keypress(function (event) {
+    event.stopPropagation();
+  });
+
+  $('body').keypress(function (event) {
+    console.log(event.which);
+    if (event.which === 'e'.charCodeAt(0)) {
+      me.openForm();
+    }
+  });
 
   return me;
 
