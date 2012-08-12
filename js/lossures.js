@@ -16,7 +16,7 @@ var LS = (function () {
         media: []
       },
       {
-        cue: 10,
+        cue: 2,
         latitude: 40.709694,
         longitude: -73.954063,
         background_audio: "audio_outside_marta_1-2.mp3",
@@ -100,9 +100,9 @@ var LS = (function () {
             type: "video",
             src: "http://lossur.es/video/grito.mp4",
             thumbnail: "img/GritodeLares.png",
-            width: 420,
+            width: 200,
             position: {
-              x: 350,
+              x: 300,
               y: 100
             },
             video_position: {
@@ -113,11 +113,24 @@ var LS = (function () {
           {
             type: "video",
             src: "http://lossur.es/video/1%20My%20view%20on%20Puerto%20Rican%20independence.mp4",
-            width: 420,
+            width: 320,
             thumbnail: "img/PuertoRicanindependence.png",
             position: {
               x: 750,
               y: 450
+            },
+            video_position: {
+              x: 50,
+              y: 100
+            }
+          },
+          {
+            type: "video",
+            src: "http://lossur.es/video/cemetary.mp4",
+            width: 300,
+            position: {
+              x: 500,
+              y: 200
             },
             video_position: {
               x: 50,
