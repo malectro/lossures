@@ -93,8 +93,10 @@ var LS = (function () {
   };
 
   me.nextScene = function () {
-    _scene++;
-
+    if (annotationData.breakpoints[_scene]) {
+      _scene++;
+      me.calcLayers();
+    }
   };
 
   me.drawPassthroughs = function () {
@@ -137,6 +139,8 @@ var LS = (function () {
     }, 1000);
     streetView.update(sceneData.latitude, sceneData.longitude);
     me.music.play(_scene - 1);
+    $('#layer-boxes').hide();
+    $("body").addClass('paused');
   };
 
   me.fullscreen = function () {
@@ -149,9 +153,11 @@ var LS = (function () {
     }
     _.delay(function () {
       $('.ls-anno-box').hide();
+      $('#layer-boxes').fadeIn();
     }, 1000);
     me.canvas.hideAll();
     me.music.stop(_scene - 1);
+    $("body").removeClass('paused');
   };
 
   me.play = function () {
@@ -186,6 +192,20 @@ var LS = (function () {
       var $zeega = $('<iframe class="ls-anno-zeega"/>');
       return $zeega.attr('src', medium.src);
     }
+  };
+
+  me.calcLayers = function () {
+    var layerCount = annotationData.breakpoints[_scene - 1].media.length,
+        $boxes = $('#layer-boxes').html('').css({
+          width: 768,
+          height: 576,
+          left: '50%',
+          marginLeft: -384,
+        });
+    _.times(layerCount, function (i) {
+      i++;
+      $('<div class="box"/>').css({top: i * 5, left: i * 5}).appendTo($boxes);
+    });
   };
 
   me.reset = function () {
@@ -224,6 +244,7 @@ var LS = (function () {
       me.canvas.drawLines(breakpoint.media, i);
 
       $('#main').append($wrapper);
+      me.calcLayers();
       pop.cue(breakpoint.cue, me.breakpoint);
     });
 
@@ -275,8 +296,7 @@ var LS = (function () {
       }, stop);
     });
 
-    me.fullscreen();
-    vid.play();
+    me.play();
   };
 
   me.init = function () {
@@ -285,45 +305,6 @@ var LS = (function () {
 
     me.reset();
     streetView = me.streetView();
-
-    // Hacky section to show the "layer indicators" at specific points.
-    var layerConfigArray = [
-        {
-          start: 0,
-          end: 7,
-          numLayers: 3
-        },
-        {
-          start: 7,
-          end: 36,
-          numLayers: 2
-        },
-        {
-          start: 36,
-          end: 46,
-          numLayers: 1
-        }
-      ],
-      layer;
-
-    for (var i = 0, len = layerConfigArray.length; i < len; i++) {
-      layer = layerConfigArray[i];
-      pop.code({
-        start: layer.start,
-        end: layer.end,
-        numLayers: layer.numLayers,
-        onStart: function (options) {
-          $('#layer-counter').html('');
-          _(options.numLayers).times(function (n){ $('#layer-counter').append($(layerItemHtml).css('bottom', n*12)); });
-          $('.layer').addClass('glow');
-        },
-        onEnd: function () {
-          $('#layer-counter').html('');
-          layerString = '';
-          $('.layer').removeClass('glow');
-        }
-      });
-    }
 
     streetView.create();
     me.music.init();

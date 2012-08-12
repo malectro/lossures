@@ -40,6 +40,8 @@ iframe {
   top: 0;
   left: 0;
   max-width: 100%;
+  z-index: 1;
+  box-shadow: 0 0 30px 10px #000;
 }
 
 /* Animation to minimize source video */
@@ -48,6 +50,9 @@ iframe {
   top: 60%;
   left: 10%;
   width: 25%;
+}
+#source-container.minimize #vid {
+  box-shadow: none;
 }
 @-webkit-keyframes minimize {
   from {
@@ -269,6 +274,18 @@ body .ls-anno-box .ls-anno-img.large {
   #canvas-container canvas.fade-in {
     display: block;
   }
+
+#layer-boxes {
+  position: absolute;
+  top: 0;
+  margin: 0 auto;
+}
+#layer-boxes .box {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #00aeef;
+}
 
 .passer {
   position: absolute;
