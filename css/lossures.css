@@ -260,6 +260,9 @@ body .ls-anno-box .ls-anno-img.large {
   #video-pause {
     float: right;
     margin: 0px 50px 20px 0px;
+    background-image: url('../img/pause.png');
+    width: 74px;
+    height: 73px;
   }
     #video-pause:hover {
       text-shadow: 2px 2px 3px #888;
@@ -270,6 +273,9 @@ body .ls-anno-box .ls-anno-img.large {
     float: right;
     margin: 0px 50px 20px 0px;
     display: none;
+    background-image: url('../img/play.png');
+    width: 74px;
+    height: 73px;
   }
     #video-play:hover {
       text-shadow: 2px 2px 3px #888;
