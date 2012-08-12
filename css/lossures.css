@@ -14,6 +14,17 @@ iframe {
   padding: 0;
 }
 
+#logo {
+  z-index: 100;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  display: none;
+}
+  #logo.fade-in {
+    display: block;
+  }
+
 /* DIV containing street view image */
 #background-container {
   position: absolute;
@@ -118,6 +129,9 @@ iframe {
   /*
   -webkit-transition: 200ms width linear, 200ms height linear, 200ms top linear, 200ms left linear;
   */
+  border: 2px solid rgba(255, 255, 255, 0.86);
+  -webkit-box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.66);
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.66);
 }
 .ls-anno-vid {
   cursor: pointer;

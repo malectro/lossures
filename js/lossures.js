@@ -136,6 +136,7 @@ var LS = (function () {
     setTimeout(function () {
       $('.ls-pause-' + _scene).show().addClass('fade-in');
       me.canvas.show(_scene);
+      $('#logo').addClass('fade-in');
     }, 1000);
     streetView.update(sceneData.latitude, sceneData.longitude);
     me.music.play(_scene - 1);
@@ -148,6 +149,7 @@ var LS = (function () {
     $('#video-play').hide();
     $('#video-pause').show();
     $('.ls-anno-box').removeClass('fade-in');
+    $('#logo').removeClass('fade-in');
     if (streetView) {
       streetView.hide();
     }
