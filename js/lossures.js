@@ -239,13 +239,18 @@ var LS = (function () {
 
         $medium.css({left: medium.position.x, top: medium.position.y, width: medium.width})
           .addClass('ls-anno-object passthrough').appendTo($wrapper);
+
       });
 
-      me.canvas.drawLines(breakpoint.media, i);
 
       $('#main').append($wrapper);
       me.calcLayers();
-      pop.cue(breakpoint.cue, me.breakpoint);
+      pop.cue(breakpoint.cue, me.nextScene);
+      $('.ls-pause-' + i).children().each(function (i, obj) {
+        breakpoint.media[i].height = $(obj).height();
+      });
+      me.canvas.drawLines(breakpoint.media, i);
+
     });
 
     $('.ls-anno-object').hover(function () {
@@ -489,22 +494,32 @@ var LS = (function () {
         minVidX = cvs.width*0.1;
         minVidY = cvs.height*0.6;
 
-        ctx.lineWidth = 0.5;
-
         _.each(media, function (item, i) {
 
           var startX = Math.round(minVidX + item.video_position.x),
               startY = Math.round(minVidY + item.video_position.y),
-              endX = Math.round(item.position.x + (item.width / 2)),
-              endY = Math.round(item.position.y + 50);
+              endX = item.position.x + item.width*0.1,
+              endY = item.position.y + item.height*0.95,
+              radius = 7,
+              distX = endX - startX,
+              distY = endY - startY,
+              hypotenuse = Math.sqrt(distX*distX + distY*distY),
+              ratio = radius / hypotenuse;
 
           ctx.beginPath();
-          ctx.moveTo(startX, startY);
-          ctx.lineTo(endX, endY);
-          ctx.strokeStyle = '#fff';
-          ctx.fillStyle = '#fff';
+          ctx.lineWidth = 4;
+          ctx.arc(startX, startY, radius, 0, Math.PI*2, true);
+          ctx.strokeStyle = '#00AEEF';
+          ctx.fillStyle = '#000';
           ctx.stroke();
-
+          ctx.globalAlpha = 0.2;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+          ctx.lineWidth = 1;
+          ctx.moveTo(startX + distX*ratio, startY + distY*ratio);
+          ctx.lineTo(endX, endY);
+          ctx.strokeStyle = '#00AEEF';
+          ctx.stroke();
         });
 
       }
