@@ -45,20 +45,20 @@ iframe {
 /* Animation to minimize source video */
 #source-container.minimize {
   -webkit-animation: minimize 1s;
-  top: 30%;
-  left: 25%;
-  width: 50%;
+  top: 60%;
+  left: 10%;
+  width: 350px;
 }
 @-webkit-keyframes minimize {
   from {
     top: 0%;
     left: 0%;
-    width: 100%;
+    width: 768px;
   }
   to {
-    top: 30%;
-    left: 25%;
-    width: 50%;
+    top: 60%;
+    left: 10%;
+    width: 350px;
   }
 }
 
@@ -191,7 +191,7 @@ body .ls-anno-box .ls-anno-img.large {
   #layer-label {
     float: left;
     font-size: 20px;
-    margin: 10px 0px 0px 50px;
+    margin: 10px 0px 0px 10px;
     position: relative;
     top: 40px;
     left: 51px;
